@@ -154,7 +154,7 @@ function createObjects() {
 	quat.set( 0, 0, 0, 1 );
 	var ground = createParalellepipedWithPhysics( 40, 1, 40, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0xFFFFFF } ) );
 	ground.receiveShadow = true;
-	textureLoader.load( "textures/grid.png", function( texture ) {
+	textureLoader.load( "../assets/textures/grid.png", function( texture ) {
 		texture.wrapS = THREE.RepeatWrapping;
 		texture.wrapT = THREE.RepeatWrapping;
 		texture.repeat.set( 40, 40 );
