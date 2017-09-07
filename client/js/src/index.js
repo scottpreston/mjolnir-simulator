@@ -168,49 +168,6 @@ function createObjects() {
 	pos.set( -8, 5, 0 );
 	quat.set( 0, 0, 0, 1 );
 	createObject( towerMass, towerHalfExtents, pos, quat, createMaterial( 0xF0A024 ) );
-
-	// Tower 2
-	pos.set( 8, 5, 0 );
-	quat.set( 0, 0, 0, 1 );
-	createObject( towerMass, towerHalfExtents, pos, quat, createMaterial( 0xF4A321 ) );
-
-	//Bridge
-	var bridgeMass = 100;
-	var bridgeHalfExtents = new THREE.Vector3( 7, 0.2, 1.5 );
-	pos.set( 0, 10.2, 0 );
-	quat.set( 0, 0, 0, 1 );
-	createObject( bridgeMass, bridgeHalfExtents, pos, quat, createMaterial( 0xB38835 ) );
-
-	// Stones
-	var stoneMass = 120;
-	var stoneHalfExtents = new THREE.Vector3( 1, 2, 0.15 );
-	var numStones = 8;
-	quat.set( 0, 0, 0, 1 );
-	for ( var i = 0; i < numStones; i++ ) {
-
-		pos.set( 0, 2, 15 * ( 0.5 - i / ( numStones + 1 ) ) );
-
-		createObject( stoneMass, stoneHalfExtents, pos, quat, createMaterial( 0xB0B0B0 ) );
-
-	}
-
-	// Mountain
-	var mountainMass = 860;
-	var mountainHalfExtents = new THREE.Vector3( 4, 5, 4 );
-	pos.set( 5, mountainHalfExtents.y * 0.5, - 7 );
-	quat.set( 0, 0, 0, 1 );
-	var mountainPoints = [];
-	mountainPoints.push( new THREE.Vector3( mountainHalfExtents.x, - mountainHalfExtents.y, mountainHalfExtents.z ) );
-	mountainPoints.push( new THREE.Vector3( - mountainHalfExtents.x, - mountainHalfExtents.y, mountainHalfExtents.z ) );
-	mountainPoints.push( new THREE.Vector3( mountainHalfExtents.x, - mountainHalfExtents.y, - mountainHalfExtents.z ) );
-	mountainPoints.push( new THREE.Vector3( - mountainHalfExtents.x, - mountainHalfExtents.y, - mountainHalfExtents.z ) );
-	mountainPoints.push( new THREE.Vector3( 0, mountainHalfExtents.y, 0 ) );
-	var mountain = new THREE.Mesh( new THREE.ConvexGeometry( mountainPoints ), createMaterial( 0xFFB443 ) );
-	mountain.position.copy( pos );
-	mountain.quaternion.copy( quat );
-	convexBreaker.prepareBreakableObject( mountain, mountainMass, new THREE.Vector3(), new THREE.Vector3(), true );
-	createDebrisFromBreakableObject( mountain );
-
 }
 
 function createParalellepipedWithPhysics( sx, sy, sz, mass, pos, quat, material ) {
