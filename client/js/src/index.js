@@ -76,8 +76,8 @@ function initGraphics() {
 	scene.background = new THREE.Color( 0xbfd1e5 );
 
 	camera.position.set( 0, 3, 20 );
-	// camera.lookAt( scene.position ); // original code, scene.position is a Vector3 at (0, 0, 0)
-	camera.lookAt( new THREE.Vector3(0, 7, 0) );
+	// camera.lookAt( scene.position ); // scene.position is a Vector3 at (0, 0, 0)
+	camera.lookAt( new THREE.Vector3(0, 8, 0) );
 
 	// Remove these comments to return to mouse movable camera
 	// controls = new THREE.OrbitControls( camera );
@@ -149,12 +149,54 @@ function createObject( mass, halfExtents, pos, quat, material ) {
 
 }
 
+function createHydraPane(xpos, ypos, zpos) {
+	// Hydra Pane 1
+	var towerMass = 100;
+	var towerHalfExtents = new THREE.Vector3( 3, 3, .1 );
+	pos.set( xpos, ypos + 3, zpos );
+	quat.set( 0, 0, 0, 1 );
+	material = new THREE.MeshLambertMaterial({ map: textureLoader.load("assets/textures/hydra.png")});
+	// createObject( towerMass, towerHalfExtents, pos, quat, createMaterial( 0xF0A024 ) ); // original object
+	createObject( towerMass, towerHalfExtents, pos, quat, material );
+
+	// fall guards, prevents thin pane from falling over, made green for debugging purposes
+	// Under supports
+	pos.set( xpos + 1, ypos, zpos );
+	quat.set( 0, 0, 0, 1 );
+	createParalellepipedWithPhysics( .1, .1, .1, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0x00cc00, transparent: true, opacity: 0 } ) );
+	pos.set( xpos - 1, ypos, zpos );
+	quat.set( 0, 0, 0, 1 );
+	createParalellepipedWithPhysics( .1, .1, .1, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0x00cc00, transparent: true, opacity: 0 } ) );
+
+	// Bottom Supports
+	pos.set( xpos - 3, ypos + 1, zpos + -.2 );
+	quat.set( 0, 0, 0, 1 );
+	createParalellepipedWithPhysics( .1, .1, .1, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0x00cc00, transparent: true, opacity: 0 } ) );
+	pos.set( xpos + 3, ypos + 1, zpos + -.2 );
+	quat.set( 0, 0, 0, 1 );
+	createParalellepipedWithPhysics( .1, .1, .1, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0x00cc00, transparent: true, opacity: 0 } ) );
+
+	// Top Supports
+	pos.set( xpos + 3, ypos + 6, zpos + .2 );
+	quat.set( 0, 0, 0, 1 );
+	createParalellepipedWithPhysics( .1, .1, .1, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0x00cc00, transparent: true, opacity: 0 } ) );
+	pos.set( xpos + 3, ypos + 6, zpos + -.2 );
+	quat.set( 0, 0, 0, 1 );
+	createParalellepipedWithPhysics( .1, .1, .1, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0x00cc00, transparent: true, opacity: 0 } ) );
+	pos.set( xpos - 3, ypos + 6, zpos + .2 );
+	quat.set( 0, 0, 0, 1 );
+	createParalellepipedWithPhysics( .1, .1, .1, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0x00cc00, transparent: true, opacity: 0 } ) );
+	pos.set( xpos - 3, ypos + 6, zpos + -.2 );
+	quat.set( 0, 0, 0, 1 );
+	createParalellepipedWithPhysics( .1, .1, .1, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0x00cc00, transparent: true, opacity: 0 } ) );
+}
+
 function createObjects() {
 
 	// Ground
 	pos.set( 0, - 0.5, 0 );
 	quat.set( 0, 0, 0, 1 );
-	var ground = createParalellepipedWithPhysics( 40, 1, 40, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0xFFFFFF } ) );
+	var ground = createParalellepipedWithPhysics( 100, 1, 100, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0xFFFFFF } ) );
 	ground.receiveShadow = true;
 	textureLoader.load( "assets/textures/tmp_background.png", function( texture ) {
 		texture.wrapS = THREE.RepeatWrapping;
@@ -164,22 +206,12 @@ function createObjects() {
 		ground.material.needsUpdate = true;
 	} );
 
-	// Tower 1
-	var towerMass = 1000;
-	var towerHalfExtents = new THREE.Vector3( 10, 10, .1 );
-	pos.set( 0, 0, 0 );
-	quat.set( 0, 0, 0, 1 );
-	material = new THREE.MeshLambertMaterial({ map: textureLoader.load("assets/textures/hydra.png")});
-	// createObject( towerMass, towerHalfExtents, pos, quat, createMaterial( 0xF0A024 ) ); // original object
-	createObject( towerMass, towerHalfExtents, pos, quat, material );
-
-	// fall guards, prevents thin pane from falling over, made green for debugging purposes
-	pos.set( 9.5, 20, .2 );
-	quat.set( 0, 0, .5, 1 );
-	createParalellepipedWithPhysics( .1, .1, .1, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0x00cc00 } ) );
-	pos.set( 9.5, 20, -.2 );
-	quat.set( 0, 0, .5, 1 );
-	createParalellepipedWithPhysics( .1, .1, .1, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0x00cc00 } ) );
+	// Add Hydra Panes
+	createHydraPane(20, .5, -15);
+	createHydraPane(-20, 15, -20);
+	createHydraPane(-10, 0, 5);
+	createHydraPane(0, 3, -17);
+	createHydraPane(7, 10, 0);
 }
 
 function createParalellepipedWithPhysics( sx, sy, sz, mass, pos, quat, material ) {
