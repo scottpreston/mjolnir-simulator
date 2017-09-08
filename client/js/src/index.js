@@ -75,11 +75,13 @@ function initGraphics() {
 	scene = new THREE.Scene();
 	scene.background = new THREE.Color( 0xbfd1e5 );
 
-	camera.position.set( -14, 8, 16 );
+	camera.position.set( 0, 3, 20 );
+	// camera.lookAt( scene.position ); // original code, scene.position is a Vector3 at (0, 0, 0)
+	camera.lookAt( new THREE.Vector3(0, 7, 0) );
 
-	controls = new THREE.OrbitControls( camera );
-	controls.target.set( 0, 2, 0 );
-	controls.update();
+	// Remove these comments to return to mouse movable camera
+	// controls = new THREE.OrbitControls( camera );
+	// controls.update();
 
 	renderer = new THREE.WebGLRenderer();
 	renderer.setPixelRatio( window.devicePixelRatio );
@@ -154,7 +156,7 @@ function createObjects() {
 	quat.set( 0, 0, 0, 1 );
 	var ground = createParalellepipedWithPhysics( 40, 1, 40, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0xFFFFFF } ) );
 	ground.receiveShadow = true;
-	textureLoader.load( "../assets/textures/grid.png", function( texture ) {
+	textureLoader.load( "assets/textures/tmp_background.png", function( texture ) {
 		texture.wrapS = THREE.RepeatWrapping;
 		texture.wrapT = THREE.RepeatWrapping;
 		texture.repeat.set( 40, 40 );
@@ -164,10 +166,20 @@ function createObjects() {
 
 	// Tower 1
 	var towerMass = 1000;
-	var towerHalfExtents = new THREE.Vector3( 2, 5, 2 );
-	pos.set( -8, 5, 0 );
+	var towerHalfExtents = new THREE.Vector3( 10, 10, .1 );
+	pos.set( 0, 0, 0 );
 	quat.set( 0, 0, 0, 1 );
-	createObject( towerMass, towerHalfExtents, pos, quat, createMaterial( 0xF0A024 ) );
+	material = new THREE.MeshLambertMaterial({ map: textureLoader.load("assets/textures/hydra.png")});
+	// createObject( towerMass, towerHalfExtents, pos, quat, createMaterial( 0xF0A024 ) ); // original object
+	createObject( towerMass, towerHalfExtents, pos, quat, material );
+
+	// fall guards, prevents thin pane from falling over, made green for debugging purposes
+	pos.set( 9.5, 20, .2 );
+	quat.set( 0, 0, .5, 1 );
+	createParalellepipedWithPhysics( .1, .1, .1, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0x00cc00 } ) );
+	pos.set( 9.5, 20, -.2 );
+	quat.set( 0, 0, .5, 1 );
+	createParalellepipedWithPhysics( .1, .1, .1, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0x00cc00 } ) );
 }
 
 function createParalellepipedWithPhysics( sx, sy, sz, mass, pos, quat, material ) {
@@ -315,11 +327,12 @@ function handleInput(x, y) {
 	var ballBody = createRigidBody( ball, ballShape, ballMass, pos, quat );
 
 	pos.copy( raycaster.ray.direction );
-	pos.multiplyScalar( 24 );
+	// pos.multiplyScalar( 24 ); // original ball velocity
+	var minVelocity = 1;
+	var maxVelocity = 50;
+	// generate a random velocity on each throw.  TODO:  Pass in an external value.
+	pos.multiplyScalar( Math.random() * (maxVelocity - minVelocity) + minVelocity );
 	ballBody.setLinearVelocity( new Ammo.btVector3( pos.x, pos.y, pos.z ) );
-
-
-
 }
 
 function onWindowResize() {
