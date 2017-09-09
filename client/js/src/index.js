@@ -331,12 +331,16 @@ function createMaterial( color ) {
 function initInput() {
 
 	window.addEventListener( 'mousedown', function (event) {
-		handleInput(event.clientX, event.clientY);
+		// generate a random velocity on each throw.  TODO:  Pass in an external value.
+		var minVelocity = 1;
+		var maxVelocity = 50;
+
+		handleInput(event.clientX, event.clientY, Math.random() * (maxVelocity - minVelocity) + minVelocity);
 	}, false );
 
 }
 
-function handleInput(x, y) {
+function handleInput(x, y, vel) {
 	mouseCoords.set(
 		( x / window.innerWidth ) * 2 - 1,
 		- ( y / window.innerHeight ) * 2 + 1
@@ -360,10 +364,7 @@ function handleInput(x, y) {
 
 	pos.copy( raycaster.ray.direction );
 	// pos.multiplyScalar( 24 ); // original ball velocity
-	var minVelocity = 1;
-	var maxVelocity = 50;
-	// generate a random velocity on each throw.  TODO:  Pass in an external value.
-	pos.multiplyScalar( Math.random() * (maxVelocity - minVelocity) + minVelocity );
+	pos.multiplyScalar(vel);
 	ballBody.setLinearVelocity( new Ammo.btVector3( pos.x, pos.y, pos.z ) );
 }
 
