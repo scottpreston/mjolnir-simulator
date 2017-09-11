@@ -47,9 +47,13 @@ var impactPoint = new THREE.Vector3();
 var impactNormal = new THREE.Vector3();
 
 // - Main code -
-
-init();
-animate();
+var hammerSTL;
+var loader = new THREE.STLLoader();
+loader.load( '../../client/assets/stls/hammer.stl', function ( geometry ) {
+	hammerSTL = geometry;
+	init();
+	animate();
+});
 
 
 // - Functions -
@@ -351,8 +355,7 @@ function handleInput(x, y, vel) {
 	// Creates a ball and throws it
 	var ballMass = 35;
 	var ballRadius = 0.4;
-
-	var ball = new THREE.Mesh( new THREE.SphereGeometry( ballRadius, 14, 10 ), ballMaterial );
+	var ball = new THREE.Mesh( hammerSTL );
 	ball.castShadow = true;
 	ball.receiveShadow = true;
 	var ballShape = new Ammo.btSphereShape( ballRadius );
