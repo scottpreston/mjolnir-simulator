@@ -49,7 +49,7 @@ var impactNormal = new THREE.Vector3();
 // - Main code -
 var hammerSTL;
 var loader = new THREE.STLLoader();
-loader.load( '../../client/assets/stls/hammer.stl', function ( geometry ) {
+loader.load( '/assets/stls/hammer.stl', function ( geometry ) {
 	hammerSTL = geometry;
 	init();
 	animate();
