@@ -333,8 +333,9 @@ function initInput() {
 		// generate a random velocity on each throw.  TODO:  Pass in an external value.
 		var minVelocity = 1;
 		var maxVelocity = 50;
-
-		handleInput(event.clientX, event.clientY, Math.random() * (maxVelocity - minVelocity) + minVelocity);
+		var sampleVel = 35
+		//handleInput(event.clientX, event.clientY, Math.random() * (maxVelocity - minVelocity) + minVelocity);
+		handleInput(event.clientX, event.clientY, sampleVel);
 	}, false );
 
 }
