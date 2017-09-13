@@ -15,6 +15,7 @@ var clock = new THREE.Clock();
 var mouseCoords = new THREE.Vector2();
 var raycaster = new THREE.Raycaster();
 var ballMaterial = new THREE.MeshPhongMaterial( { color: 0x202020 } );
+var stlLoader = new THREE.STLLoader();
 
 // Physics variables
 var gravityConstant = 7.8;
@@ -47,14 +48,8 @@ var impactPoint = new THREE.Vector3();
 var impactNormal = new THREE.Vector3();
 
 // - Main code -
-var hammerSTL;
-var loader = new THREE.STLLoader();
-loader.load( '/assets/stls/hammer.stl', function ( geometry ) {
-	hammerSTL = geometry;
-	init();
-	animate();
-});
-
+init();
+animate();
 
 // - Functions -
 
@@ -352,23 +347,49 @@ function handleInput(x, y, vel) {
 
 	raycaster.setFromCamera( mouseCoords, camera );
 
-	// Creates a ball and throws it
-	var ballMass = 35;
-	var ballRadius = 0.4;
-	var ball = new THREE.Mesh( hammerSTL );
-	ball.castShadow = true;
-	ball.receiveShadow = true;
-	var ballShape = new Ammo.btSphereShape( ballRadius );
-	ballShape.setMargin( margin );
-	pos.copy( raycaster.ray.direction );
-	pos.add( raycaster.ray.origin );
-	quat.set( 0, 0, 0, 1 );
-	var ballBody = createRigidBody( ball, ballShape, ballMass, pos, quat );
+	stlLoader.load( 'assets/stl/hammer.stl', function ( geometry ) {
+		var material = new THREE.MeshPhongMaterial( { color: 0xAAAAAA, specular: 0x111111, shininess: 200 } );
+		var meshMaterial = material;
+		if (geometry.hasColors) {
+			meshMaterial = new THREE.MeshPhongMaterial({ opacity: geometry.alpha, vertexColors: THREE.VertexColors });
+		}
+		var hammerMesh = new THREE.Mesh( geometry, meshMaterial );
+		hammerMesh.scale.set( 0.02, 0.02, 0.02 );
+		hammerMesh.castShadow = true;
+		hammerMesh.receiveShadow = true;
 
-	pos.copy( raycaster.ray.direction );
-	// pos.multiplyScalar( 24 ); // original ball velocity
-	pos.multiplyScalar(vel);
-	ballBody.setLinearVelocity( new Ammo.btVector3( pos.x, pos.y, pos.z ) );
+		pos.copy( raycaster.ray.direction );
+		pos.add( raycaster.ray.origin );
+		quat.set( -1, 0, 0, 1 );
+
+		var physicsShape = new Ammo.btBoxShape(new Ammo.btVector3(.2, .2, .1))
+		var hammerMass = 100;
+		var hammerBody = createRigidBody( hammerMesh, physicsShape, hammerMass, pos, quat );
+
+		pos.copy( raycaster.ray.direction );
+		pos.multiplyScalar(vel);
+		hammerBody.setLinearVelocity( new Ammo.btVector3( pos.x, pos.y, pos.z ) );
+		
+		scene.add( hammerMesh );
+	} );
+
+	// Creates a ball and throws it
+	// var ballMass = 35;
+	// var ballRadius = 0.4;
+	// var ball = new THREE.Mesh( hammerSTL );
+	// ball.castShadow = true;
+	// ball.receiveShadow = true;
+	// var ballShape = new Ammo.btSphereShape( ballRadius );
+	// ballShape.setMargin( margin );
+	// pos.copy( raycaster.ray.direction );
+	// pos.add( raycaster.ray.origin );
+	// quat.set( 0, 0, 0, 1 );
+	// var ballBody = createRigidBody( ball, ballShape, ballMass, pos, quat );
+
+	// pos.copy( raycaster.ray.direction );
+	// // pos.multiplyScalar( 24 ); // original ball velocity
+	// pos.multiplyScalar(vel);
+	// ballBody.setLinearVelocity( new Ammo.btVector3( pos.x, pos.y, pos.z ) );
 }
 
 function onWindowResize() {
