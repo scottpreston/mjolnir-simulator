@@ -343,7 +343,7 @@ function handleInput(x, y, vel) {
 
 	raycaster.setFromCamera( mouseCoords, camera );
 
-	stlLoader.load( 'assets/stl/hammer.stl', function ( geometry ) {
+	stlLoader.load( 'assets/stl/hammer2.stl', function ( geometry ) {
 		var material = new THREE.MeshPhongMaterial( { color: 0xAAAAAA, specular: 0x111111, shininess: 200 } );
 		var meshMaterial = material;
 		if (geometry.hasColors) {
@@ -356,9 +356,9 @@ function handleInput(x, y, vel) {
 
 		pos.copy( raycaster.ray.direction );
 		pos.add( raycaster.ray.origin );
-		quat.set( -1, 0, 0, 1 );
+		quat.set( -1, -1, 1, 1 );
 
-		var physicsShape = new Ammo.btBoxShape(new Ammo.btVector3(.2, .2, .1))
+		var physicsShape = new Ammo.btBoxShape(new Ammo.btVector3(.2, 1, .1))
 		var hammerMass = 100;
 		var hammerBody = createRigidBody( hammerMesh, physicsShape, hammerMass, pos, quat );
 
