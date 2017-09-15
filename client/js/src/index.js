@@ -329,15 +329,10 @@ function createMaterial( color ) {
 
 function initInput() {
 
-	window.addEventListener( 'mousedown', function (event) {
-		// generate a random velocity on each throw.  TODO:  Pass in an external value.
-		var minVelocity = 1;
-		var maxVelocity = 50;
-		var sampleVel = 35
-		//handleInput(event.clientX, event.clientY, Math.random() * (maxVelocity - minVelocity) + minVelocity);
-		handleInput(event.clientX, event.clientY, sampleVel);
-	}, false );
-
+	window.addEventListener('generateHammer', function(e) {
+		console.log('Handling Event');
+		handleInput(e.detail.inputValues.x, e.detail.inputValues.y, e.detail.inputValues.velocity);
+	});
 }
 
 function handleInput(x, y, vel) {
