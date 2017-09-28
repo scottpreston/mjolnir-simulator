@@ -330,7 +330,6 @@ function createMaterial( color ) {
 function initInput() {
 
 	window.addEventListener('generateHammer', function(e) {
-		console.log('Handling Event');
 		handleInput(e.detail.inputValues.x, e.detail.inputValues.y, e.detail.inputValues.velocity);
 	});
 }
@@ -365,7 +364,7 @@ function handleInput(x, y, vel) {
 		pos.copy( raycaster.ray.direction );
 		pos.multiplyScalar(vel);
 		hammerBody.setLinearVelocity( new Ammo.btVector3( pos.x, pos.y, pos.z ) );
-		
+
 		scene.add( hammerMesh );
 	} );
 
@@ -531,7 +530,12 @@ function updatePhysics( deltaTime ) {
 	for ( var i = 0; i < numObjectsToRemove; i++ ) {
 
 		removeDebris( objectsToRemove[ i ] );
-
+		var data = {
+			score: 10,
+			target: 'hydra'
+		};
+		var event = new CustomEvent('targetHit', {detail: {data: data}});
+		window.dispatchEvent(event);
 	}
 	numObjectsToRemove = 0;
 
