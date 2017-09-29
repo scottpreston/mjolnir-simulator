@@ -1,0 +1,28 @@
+body {
+  color: #61443e;
+  font-family:Monospace;
+  font-size:13px;
+  text-align:center;
+
+  background-color: #bfd1e5;
+  margin: 0px;
+  overflow: hidden;
+}
+
+#info {
+  position: absolute;
+  top: 0px; width: 100%;
+  padding: 5px;
+}
+
+a {
+  color: #a06851;
+}
+
+.score-board {
+    position: absolute;
+    right: 20px;
+    font-size: 40px;
+    top: 20px;
+    color: red;
+}
