@@ -5,11 +5,9 @@ window.mjolnirGameObject = {
 };
 
 window.addEventListener('targetHit', function (event) {
-  console.log('Wasted!');
-  var score = event.detail.data.score + window.mjolnirGameObject.score;
-  window.mjolnirGameObject.score = score;
-
-  updateScore(score);
+  console.log(event.detail.target + ' Wasted');
+  window.mjolnirGameObject.score += event.detail.score;
+  updateScore(window.mjolnirGameObject.score);
 });
 
 function updateScore(score) {

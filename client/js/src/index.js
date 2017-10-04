@@ -138,25 +138,46 @@ function initPhysics() {
 
 }
 
-function createObject( mass, halfExtents, pos, quat, material ) {
+function createObject( mass, halfExtents, pos, quat, material, targetData ) {
 
 	var object = new THREE.Mesh( new THREE.BoxGeometry( halfExtents.x * 2, halfExtents.y * 2, halfExtents.z * 2 ), material );
 	object.position.copy( pos );
 	object.quaternion.copy( quat );
+	object.targetData = targetData;
 	convexBreaker.prepareBreakableObject( object, mass, new THREE.Vector3(), new THREE.Vector3(), true );
 	createDebrisFromBreakableObject( object );
 
 }
 
-function createHydraPane(xpos, ypos, zpos) {
+function createTargetPane(xpos, ypos, zpos, targetData) {
 	// Hydra Pane 1
 	var towerMass = 100;
 	var towerHalfExtents = new THREE.Vector3( 3, 3, .1 );
 	pos.set( xpos, ypos + 3, zpos );
 	quat.set( 0, 0, 0, 1 );
-	material = new THREE.MeshLambertMaterial({ map: textureLoader.load("assets/textures/hydra.png")});
+
+	switch(targetData.type) {
+		case 'hydra':
+			material = new THREE.MeshLambertMaterial({ map: textureLoader.load("assets/textures/hydra.png")});
+			break;
+		case 'ultron':
+			material = new THREE.MeshLambertMaterial({ map: textureLoader.load("assets/textures/ultron.png")});
+			break;
+		case 'loki':
+			material = new THREE.MeshLambertMaterial({ map: textureLoader.load("assets/textures/loki.png")});
+			break;
+		case 'shield':
+			material = new THREE.MeshLambertMaterial({ map: textureLoader.load("assets/textures/shield.png")});
+			break;
+		case 'thanos':
+			material = new THREE.MeshLambertMaterial({ map: textureLoader.load("assets/textures/thanos.jpg")});
+			break;
+		default:
+			material = new THREE.MeshLambertMaterial({ map: textureLoader.load("assets/textures/tmp_background.png")});
+	}
+
 	// createObject( towerMass, towerHalfExtents, pos, quat, createMaterial( 0xF0A024 ) ); // original object
-	createObject( towerMass, towerHalfExtents, pos, quat, material );
+	createObject( towerMass, towerHalfExtents, pos, quat, material, targetData );
 
 	// fall guards, prevents thin pane from falling over, made green for debugging purposes
 	// Under supports
@@ -205,12 +226,18 @@ function createObjects() {
 		ground.material.needsUpdate = true;
 	} );
 
+	var hydraTargetData = {type: 'hydra', score: 10};
+	var ultronTargetData = {type: 'ultron', score: 20};
+	var lokiTargetData = {type: 'loki', score: 30};
+	var shieldTargetData = {type: 'shield', score: -20};
+	var thanosTargetData = {type: 'thanos', score: 80};
+
 	// Add Hydra Panes
-	createHydraPane(20, .5, -15);
-	createHydraPane(-20, 15, -20);
-	createHydraPane(-10, 0, 5);
-	createHydraPane(0, 3, -17);
-	createHydraPane(7, 10, 0);
+	createTargetPane(20, .5, -15, hydraTargetData);
+	createTargetPane(-20, 15, -20, ultronTargetData);
+	createTargetPane(-10, 0, 5, lokiTargetData);
+	createTargetPane(0, 3, -17, shieldTargetData);
+	createTargetPane(7, 10, 0, thanosTargetData);
 }
 
 function createParalellepipedWithPhysics( sx, sy, sz, mass, pos, quat, material ) {
@@ -529,13 +556,14 @@ function updatePhysics( deltaTime ) {
 
 	for ( var i = 0; i < numObjectsToRemove; i++ ) {
 
-		removeDebris( objectsToRemove[ i ] );
-		var data = {
-			score: 10,
-			target: 'hydra'
-		};
-		var event = new CustomEvent('targetHit', {detail: {data: data}});
+		console.log(objectsToRemove[ i ]);
+
+		var targetData = objectsToRemove[i].targetData;
+
+		var event = new CustomEvent('targetHit', {detail: targetData});
 		window.dispatchEvent(event);
+
+		removeDebris( objectsToRemove[ i ] );
 	}
 	numObjectsToRemove = 0;
 
