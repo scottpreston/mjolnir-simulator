@@ -555,9 +555,6 @@ function updatePhysics( deltaTime ) {
 	}
 
 	for ( var i = 0; i < numObjectsToRemove; i++ ) {
-
-		console.log(objectsToRemove[ i ]);
-
 		var targetData = objectsToRemove[i].targetData;
 
 		var event = new CustomEvent('targetHit', {detail: targetData});
