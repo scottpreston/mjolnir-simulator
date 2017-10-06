@@ -362,6 +362,8 @@ function initInput() {
 }
 
 function handleInput(x, y, vel) {
+	console.log('Input Handler: ' + 'x: ' + x + ', y: ' + y + ', vel: ' + vel);
+
 	mouseCoords.set(
 		( x / window.innerWidth ) * 2 - 1,
 		- ( y / window.innerHeight ) * 2 + 1
