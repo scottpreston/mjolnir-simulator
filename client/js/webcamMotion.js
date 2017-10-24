@@ -80,7 +80,7 @@ function processImage(ctx, ctx2, callback) {
         }
         if (avgX > 0 && avgY > 0 && hits > 50 && new Date().getTime() > hitTime + 5000) {
             hitTime = new Date().getTime();
-            stopCapture();
+            //stopCapture();
             callback(avgX / hits, avgY / hits)
         } else {
             console.log(hits)
