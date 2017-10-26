@@ -37,7 +37,7 @@ var transformAux1 = new Ammo.btTransform();
 var tempBtVec3_1 = new Ammo.btVector3( 0, 0, 0 );
 
 var time = 0;
-var currentLevel = getCurrentLevel();
+var currentLevel = getCurrentLevel() || 0;
 
 var objectsToRemove = [];
 for ( var i = 0; i < 500; i++ ) {
