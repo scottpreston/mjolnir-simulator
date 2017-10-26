@@ -37,6 +37,7 @@ var setupInputSources = function (event) {
     window.removeEventListener('mousedown', handleMouseClick);
 
     webcamMotionInstance !== null ? stopCapture() : console.log('nothing to stop');
+    webcamMotionInstance = null;
 
     var isMouse = document.querySelector("input[name='hammerSource']:checked").value === 'mouse';
 

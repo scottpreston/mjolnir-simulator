@@ -47,21 +47,14 @@ a {
  line-height: 22px;
 }
 
-.info li label {
-  border-top: 1px black solid;
-  border-bottom: 1px black solid;
-}
-
 .info li.left label{
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
-  border-left: 1px black solid;
 }
 
 .info li.right label{
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
-  border-right: 1px black solid;
 }
 
 .info label, .info input {
