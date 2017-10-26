@@ -11,7 +11,8 @@ body {
 
 #info {
   position: absolute;
-  top: 0px; width: 100%;
+  top: 0px;
+  width: 100%;
   padding: 5px;
 }
 
@@ -23,7 +24,7 @@ a {
     position: absolute;
     right: 20px;
     font-size: 40px;
-    top: 20px;
+    top: 65px;
     color: red;
 }
 
@@ -31,4 +32,12 @@ a {
   position: absolute;
   top: 20px;
   width: 100%;
+}
+
+.hit_score {
+	position: absolute;
+	right: 20px;
+	font-size: 40px;
+	top: 20px;
+	color: red;
 }
