@@ -1,22 +1,27 @@
 <html lang="en">
-	<head>
-		<title>Mjolnir Simulator</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<link rel="stylesheet" href="css/index.css">
-	</head>
-	<body>
 
-	<div id="info">
-		<label>
-			Mouse
-			<input type="radio" name="hammerSource" value="mouse">
-		</label>
-		<label>
-			WebCam
-			<input type="radio" name="hammerSource" value="webcam" checked>
-		</label>
-	</div>
+<head>
+	<title>Mjolnir Simulator</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+	<form>
+		<ul class="info">
+			<li class="left">
+				<input class="btn" type="radio" id="toggle-on" name="hammerSource" value="mouse" checked>
+				<label for="toggle-on">Mouse</label>
+			</li>
+			<li class="right">
+				<input class="btn" type="radio" id="toggle-off" name="hammerSource" value="webcam">
+				<label for="toggle-off">WebCam</label>
+			</li>
+		</ul>
+	</form>
+
 	<div class="score-board">
 		Points:<span>0</span>
 	</div>
@@ -34,9 +39,9 @@
 	<script src="js/lib/STLLoader.js"></script>
 
 	<video autoplay id="vid" style="display:none;" height="720" width="1280"></video>
-    <div>
-        <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
-        <canvas id="canvas2" width="320" height="240" style="display:none;"></canvas>
+	<div>
+		<canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+		<canvas id="canvas2" width="320" height="240" style="display:none;"></canvas>
 	</div>
 
 
@@ -47,5 +52,6 @@
 	<script src="js/src/wsClient.js"></script>
 	<script src="js/src/index.js"></script>
 
-	</body>
+</body>
+
 </html>
