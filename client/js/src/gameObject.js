@@ -1,7 +1,17 @@
 // Master Game Object
 
 window.mjolnirGameObject = {
-    score: 0
+    score: 0,
+
+    levels : [{
+    	background: "assets/textures/iceground.jpg",
+    	ground: "assets/textures/snow.jpg"
+    },
+    {
+    	background: "assets/textures/alien_background2.jpg",
+    	ground: "assets/textures/ground_texture.jpg"
+    }
+	]
 };
 
 window.addEventListener('targetHit', function (event) {
@@ -12,4 +22,9 @@ window.addEventListener('targetHit', function (event) {
 
 function updateScore(score) {
   document.querySelector('.score-board span').textContent = score;
+}
+
+function getCurrentLevel () {
+	var searchParams = new URLSearchParams(window.location.search);
+	return searchParams.get('level');
 }

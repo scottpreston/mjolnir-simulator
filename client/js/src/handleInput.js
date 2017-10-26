@@ -1,28 +1,23 @@
-// window.addEventListener( 'mousedown', function (event) {
-//     var velocity = 35 // TODO: Temporary value for testing
+window.addEventListener( 'mousedown', function (event) {
+    var velocity = 35 // TODO: Temporary value for testing
 
-//     var inputValues = {
-//         x: event.clientX,
-//         y: event.clientY,
-//         velocity: velocity
-//     };
+    var inputValues = {
+        x: event.clientX,
+        y: event.clientY,
+        velocity: velocity
+    };
 
-//     var event = new CustomEvent('generateHammer', { detail: {inputValues: inputValues} });
-//     window.dispatchEvent(event);
-// });
+    var event = new CustomEvent('generateHammer', { detail: {inputValues: inputValues} });
+    window.dispatchEvent(event);
+});
 
 
-// window.onload = function () {
-// 	var searchParams = new URLSearchParams(window.location.search);
+var links = document.querySelectorAll('.level-link');
 
-// 	if (window.location.search) {
-// 		var inputValues = {
-// 			x: searchParams.get('x'),
-// 			y: searchParams.get('y'),
-// 			velocity: searchParams.get('velocity')
-// 		};
+links.forEach(function (link) {
+	link.addEventListener('click', function(e) {
+		e.preventDefault();
+		window.location.search = '?level=' + event.target.getAttribute('data-level');
+	});
+});
 
-// 		var event = new CustomEvent('generateHammer', { detail: {inputValues: inputValues} });
-// 		window.dispatchEvent(event);
-// 	}
-// };

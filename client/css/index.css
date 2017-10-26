@@ -26,3 +26,9 @@ a {
     top: 20px;
     color: red;
 }
+
+.level-link-container {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+}
