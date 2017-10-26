@@ -360,10 +360,6 @@ function initInput() {
 	window.addEventListener('generateHammer', function(e) {
 		handleInput(e.detail.inputValues.x, e.detail.inputValues.y, e.detail.inputValues.velocity);
 	});
-
-	window.addEventListener('updateLevel', function (e) {
-
-	});
 }
 
 function handleInput(x, y, vel) {
