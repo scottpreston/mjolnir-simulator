@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-window.addEventListener( 'mousedown', function (event) {
-    var velocity = 35 // TODO: Temporary value for testing
-
-    var inputValues = {
-        x: event.clientX,
-        y: event.clientY,
-        velocity: velocity
-    };
-
-    var event = new CustomEvent('generateHammer', { detail: {inputValues: inputValues} });
-    window.dispatchEvent(event);
-});
-=======
 var handleMouseClick = function (event) {
         var velocity = 35 // TODO: Temporary value for testing
 
@@ -74,7 +60,6 @@ Array.from(radioButtons).forEach(function (radioButton) {
         setupInputSources();
     });
 })
->>>>>>> 4afc93334740eb0ac9baa8677f5223ffea0a1d03
 
 
 var links = document.querySelectorAll('.level-link');
