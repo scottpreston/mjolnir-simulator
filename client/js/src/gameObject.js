@@ -32,6 +32,11 @@ function updateScore(hit_score) {
     document.querySelector('.score-board span').textContent = window.mjolnirGameObject.score;
 }
 
+function resetGame() {
+    localStorage.removeItem('mjs-score');
+    window.location.reload();
+}
+
 function getCurrentLevel() {
     var searchParams = new URLSearchParams(window.location.search);
     return searchParams.get('level');

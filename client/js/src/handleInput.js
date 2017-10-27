@@ -1,4 +1,4 @@
-var handleMouseClick = function (event) {
+var handleMouseClick = function(event) {
     var velocity = 35 // TODO: Temporary value for testing
 
     var inputValues = {
@@ -12,10 +12,10 @@ var handleMouseClick = function (event) {
 };
 //making this global variable so that I can access it in setupInputSources
 var webcamMotionInstance = null;
-var handleWebCamMotion = function () {
+var handleWebCamMotion = function() {
     var webcamConfig = { video: "#vid", canvas1: "#canvas", canvas2: "#canvas2", fps: 30 };
     if (webcamMotionInstance === null) {
-        webcamMotionInstance = new WebCamMotion(webcamConfig, function (x, y) {
+        webcamMotionInstance = new WebCamMotion(webcamConfig, function(x, y) {
             console.log({ x: x, y: y });
             var velocity = 35 // TODO: Temporary value for testing
 
@@ -31,7 +31,7 @@ var handleWebCamMotion = function () {
     }
 };
 
-var setupInputSources = function (event) {
+var setupInputSources = function(event) {
 
     //remove the listener before setting it up again
     window.removeEventListener('mousedown', handleMouseClick);
@@ -53,8 +53,8 @@ setupInputSources();
 
 //run the setup after page load, good for re setting up the source
 var radioButtons = document.querySelectorAll("input[name='hammerSource']");
-Array.from(radioButtons).forEach(function (radioButton) {
-    radioButton.addEventListener('mousedown', function (event) {
+Array.from(radioButtons).forEach(function(radioButton) {
+    radioButton.addEventListener('mousedown', function(event) {
         event.target.checked = true;
         event.stopPropagation();
         setupInputSources();
@@ -63,8 +63,8 @@ Array.from(radioButtons).forEach(function (radioButton) {
 
 var links = document.querySelectorAll('.level-link');
 
-links.forEach(function (link) {
-    link.addEventListener('click', function (e) {
+links.forEach(function(link) {
+    link.addEventListener('click', function(e) {
         e.preventDefault();
         window.location.search = '?level=' + event.target.getAttribute('data-level');
     });

@@ -70,7 +70,7 @@ a {
   list-style-type:none;
   position: absolute;
   bottom: 20px;
-  width: 100px;
+  width: 200px;
   right: 20px;
 }
 
@@ -96,6 +96,11 @@ a {
 .level-link-container li a:hover {
   background-color: #222;
   color: lightgreen;
+}
+
+.level-link-container li a.reset-button {
+    width: 60px;
+    margin-left: 60px;
 }
 
 /* toggle button */
