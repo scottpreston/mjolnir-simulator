@@ -23,18 +23,47 @@ a {
 
 .score-board {
     position: absolute;
-    right: 20px;
-    font-size: 40px;
-    top: 65px;
-    color: red;
+    right: 0px;
+    top: 0px;
+    width: 200px;
 }
 
-.hit_score {
-	position: absolute;
-	right: 20px;
-	font-size: 40px;
-	top: 20px;
-	color: red;
+.hit-score {
+    position: relative;
+    left: 10px;
+    float: left;
+    background-color: #222;
+    border: 2px solid #eee;
+    width: 46px;
+    height: 46px;
+    border-radius: 25px;
+    text-align: center;
+    line-height: 46px;
+    font-size: 22px;
+    color: lightgreen;
+}
+
+.total-score {
+    top: 10px;
+    position: relative;
+    float: right;
+    width: 146px;
+    height: 36px;
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 2px solid #eee;
+    background-color: #222;
+}
+
+.total-score span {
+    float: right;
+    line-height: 25px;
+    padding-top: 5px;
+    padding-right: 10px;
+    font-size: 18px;
+    text-align: right;
+    color: lightgreen;
 }
 
 .level-link-container {
