@@ -10,6 +10,10 @@ window.mjolnirGameObject = {
     {
         background: "assets/textures/alien_background2.jpg",
         ground: "assets/textures/ground_texture.jpg"
+    },
+    {
+        background: "assets/textures/snow_texture.jpg",
+        ground: "assets/textures/snow.jpg"
     }
     ]
 };
@@ -43,10 +47,10 @@ function getCurrentLevel() {
     var searchParams = new URLSearchParams(window.location.search);
     var levelNumber = searchParams.get('level');
     if (levelNumber) {
-        return levelNumber - 1;
+        return levelNumber;
     }
     window.history.pushState({}, '', '?level=1');
-    return 0;
+    return 1;
 }
 
 function scoreInit() {
