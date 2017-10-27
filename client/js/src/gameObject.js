@@ -34,17 +34,19 @@ function updateScore(hit_score) {
 
 function resetGame() {
     localStorage.removeItem('mjs-score');
+
+    window.history.pushState({}, '', '?level=1');
     window.location.reload();
 }
 
 function getCurrentLevel() {
     var searchParams = new URLSearchParams(window.location.search);
-    return searchParams.get('level');
-}
-
-function getCurrentLevel() {
-    var searchParams = new URLSearchParams(window.location.search);
-    return searchParams.get('level');
+    var levelNumber = searchParams.get('level');
+    if (levelNumber) {
+        return levelNumber - 1;
+    }
+    window.history.pushState({}, '', '?level=1');
+    return 0;
 }
 
 function scoreInit() {
