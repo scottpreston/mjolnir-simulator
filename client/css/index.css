@@ -12,7 +12,8 @@ body {
 
 #info {
   position: absolute;
-  top: 0px; width: 100%;
+  top: 0px;
+  width: 100%;
   padding: 5px;
 }
 
@@ -22,17 +23,54 @@ a {
 
 .score-board {
     position: absolute;
-    right: 20px;
-    font-size: 40px;
-    top: 20px;
-    color: red;
+    right: 0px;
+    top: 0px;
+    width: 200px;
+}
+
+.hit-score {
+    position: relative;
+    left: 10px;
+    float: left;
+    background-color: #222;
+    border: 2px solid #eee;
+    width: 46px;
+    height: 46px;
+    border-radius: 25px;
+    text-align: center;
+    line-height: 46px;
+    font-size: 22px;
+    color: lightgreen;
+}
+
+.total-score {
+    top: 10px;
+    position: relative;
+    float: right;
+    width: 146px;
+    height: 36px;
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 2px solid #eee;
+    background-color: #222;
+}
+
+.total-score span {
+    float: right;
+    line-height: 25px;
+    padding-top: 5px;
+    padding-right: 10px;
+    font-size: 18px;
+    text-align: right;
+    color: lightgreen;
 }
 
 .level-link-container {
   list-style-type:none;
   position: absolute;
   bottom: 20px;
-  width: 100px;
+  width: 200px;
   right: 20px;
 }
 
@@ -58,6 +96,11 @@ a {
 .level-link-container li a:hover {
   background-color: #222;
   color: lightgreen;
+}
+
+.level-link-container li a.reset-button {
+    width: 60px;
+    margin-left: 60px;
 }
 
 /* toggle button */
