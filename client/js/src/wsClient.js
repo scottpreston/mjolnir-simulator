@@ -36,4 +36,4 @@ function start() {
     };
 }
 
-start();
+// start();

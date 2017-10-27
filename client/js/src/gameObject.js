@@ -29,3 +29,8 @@ function getCurrentLevel () {
 	var searchParams = new URLSearchParams(window.location.search);
 	return searchParams.get('level');
 }
+
+function getCurrentLevel () {
+	var searchParams = new URLSearchParams(window.location.search);
+	return searchParams.get('level');
+}
