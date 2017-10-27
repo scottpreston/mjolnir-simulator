@@ -37,6 +37,7 @@ var transformAux1 = new Ammo.btTransform();
 var tempBtVec3_1 = new Ammo.btVector3( 0, 0, 0 );
 
 var time = 0;
+var currentLevel = getCurrentLevel() || 0;
 
 var objectsToRemove = [];
 for ( var i = 0; i < 500; i++ ) {
@@ -72,7 +73,7 @@ function initGraphics() {
 	camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.2, 2000 );
 
 	scene = new THREE.Scene();
-	scene.background = new THREE.TextureLoader().load( "assets/textures/alien_background2.jpg" );
+	scene.background = new THREE.TextureLoader().load( window.mjolnirGameObject.levels[currentLevel].background );
 
 	camera.position.set( 0, 3, 20 );
 	// camera.lookAt( scene.position ); // scene.position is a Vector3 at (0, 0, 0)
@@ -218,7 +219,7 @@ function createObjects() {
 	quat.set( 0, 0, 0, 1 );
 	var ground = createParalellepipedWithPhysics( 100, 1, 100, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0xFFFFFF } ) );
 	ground.receiveShadow = true;
-	textureLoader.load( "assets/textures/ground_texture.jpg", function( texture ) {
+	textureLoader.load( window.mjolnirGameObject.levels[currentLevel].ground, function( texture ) {
 		texture.wrapS = THREE.RepeatWrapping;
 		texture.wrapT = THREE.RepeatWrapping;
 		texture.repeat.set( 3, 2 );
