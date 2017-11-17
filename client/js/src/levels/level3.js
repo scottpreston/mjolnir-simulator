@@ -21,9 +21,9 @@ function createLevel3Objects() {
     var thanosTargetData = { type: 'thanos', score: 80 };
 
     // Add Hydra Panes
-    createTargetPane(20, .5, -15, hydraTargetData);
-    createTargetPane(-20, 15, -20, ultronTargetData);
-    createTargetPane(-10, 0, 5, lokiTargetData);
-    createTargetPane(0, 3, -17, shieldTargetData);
+    createTargetPane(20, .5, -15, thanosTargetData);
+    createTargetPane(-20, 15, -20, thanosTargetData);
+    createTargetPane(-10, 0, 5, thanosTargetData);
+    createTargetPane(0, 3, -17, thanosTargetData);
     createTargetPane(7, 10, 0, thanosTargetData);
 }

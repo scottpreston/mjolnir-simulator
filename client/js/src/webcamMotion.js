@@ -2,6 +2,7 @@ var webcamInterval;
 var hitTime = new Date().getTime();
 var previousImageData;
 function WebCamMotion(options, callback) {
+    
     console.log( navigator.mediaDevices.getSupportedConstraints())
     var self = this;
     this.fps = 1000 / options.fps;
@@ -46,6 +47,7 @@ function processImage(ctx, ctx2, callback) {
     var data = imageData.data;
     var newData = newImageData.data;
     var avgX = 0, avgY = 0, hits = 0, totalX=0, totalY=0;
+    
     if (previousImageData != null) {
         var previousData = previousImageData.data;
         //console.log(previousData)
@@ -63,6 +65,7 @@ function processImage(ctx, ctx2, callback) {
                 var gray = (r + g + b) / 3;
                 var oldGray = (oldR + oldG + oldB) / 3;
                 if (isBlue(r, g, b) && isDifferent(gray, oldGray)) {
+                //if (isDifferent(gray, oldGray)) {
                     newData[offset] = 0;
                     newData[offset + 1] = 0;
                     newData[offset + 2] = 0;
@@ -78,10 +81,16 @@ function processImage(ctx, ctx2, callback) {
                 }
             }
         }
-        if (avgX > 0 && avgY > 0 && hits > 50 && new Date().getTime() > hitTime + 5000) {
+        if (avgX > 0 && avgY > 0 && hits > 150 && new Date().getTime() > hitTime + 5000) {
             hitTime = new Date().getTime();
+            setTimeout(function() {
+                console.log('ready')
+            },5000);
+            var x = avgX/hits, y = avgY/hits;
+            circle(x,y)
             //stopCapture();
-            callback(avgX / hits, avgY / hits)
+            callback(x,y)
+            console.log('used hits=', hits)
         } else {
             console.log(hits)
         }
@@ -90,6 +99,16 @@ function processImage(ctx, ctx2, callback) {
     previousImageData = imageData;
     ctx2.putImageData(newImageData, 0, 0);
 };
+function circle(x,y) {
+    var canvas = document.querySelector("#canvas3");
+    var context = canvas.getContext('2d');
+    var radius = 20;
+
+    context.beginPath();
+    context.arc(x, y, radius, 0, 2 * Math.PI, false);
+    context.fillStyle = 'green';
+    context.fill();
+}
 
 function isDifferent(curPixel, prevPixel) {
     var diff = Math.abs(curPixel - prevPixel);
@@ -101,5 +120,6 @@ function isRed(r, g, b) {
 }
 
 function isBlue(r, g, b) {
-    return (b > r + 50 && b > g + 1);
+    //return (b > r + 30 && b > g + 10);
+    return (b > 240);
 }
