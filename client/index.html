@@ -1,73 +1,30 @@
 <html lang="en">
 
 <head>
-    <title>Mjolnir Simulator</title>
+    <title>Mjolnir Simulator - Home Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
-
-    <form>
-        <ul class="info">
-            <li class="left">
-                <input class="btn" type="radio" id="toggle-on" name="hammerSource" value="mouse" checked>
-                <label for="toggle-on">Mouse</label>
-            </li>
-            <li class="right">
-                <input class="btn" type="radio" id="toggle-off" name="hammerSource" value="webcam">
-                <label for="toggle-off">WebCam</label>
-            </li>
-        </ul>
-    </form>
-
-    <ul class="level-link-container">
-        <li><a class="level-link" href="#" data-level="1">1</a></li>
-        <li><a class="level-link" href="#" data-level="2">2</a></li>
-        <li><a class="level-link" href="#" data-level="3">3</a></li>
-        <li><a class="reset-button" onclick="resetGame()">Reset</a></li>
-    </ul>
-
-    <div class="score-board">
-        <div class="total-score">
-            <span>0</span>
-        </div>
-        <div class="hit-score">
-            <span>0</span>
-        </div>
-    </div>
-
-    <div id="container"><br /><br /><br /><br /><br />Loading...</div>
-
-    <!--libs -->
-    <script src="js/lib/three.js"></script>
-    <script src="js/lib/ammo.js"></script>
-    <script src="js/lib/OrbitControls.js"></script>
-    <script src="js/lib/Detector.js"></script>
-    <script src="js/lib/stats.min.js"></script>
-    <script src="js/lib/ConvexObjectBreaker.js"></script>
-    <script src="js/lib/QuickHull.js"></script>
-    <script src="js/lib/ConvexGeometry.js"></script>
-    <script src="js/lib/STLLoader.js"></script>
-
-    <video autoplay id="vid" style="display:none;" height="720" width="1280"></video>
+    <h1>Mjolnir Simulator </h1>
+    <p>Click a link below:</p>
     <div>
-        <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
-        <canvas id="canvas2" width="320" height="240" style="display:none;"></canvas>
+        <p>
+            <a href="game.html">Game</a> - play the Game
+        </p>
+        <p>
+            <a href="webcam-test.html">Test Webcam Capture</a> - test the webcam capture
+        </p>
+        <p>
+            <a href="webcam-fps.html">Test Webcam FPS</a> - test the webcam FPS (Frames Per Second) -- CHROME ONLY
+        </p>
+        <p>
+            <a href="webcam-calibrate.html">Calibrate WebCam</a> - calibrate webcam x-y coordinates
+        </p>
     </div>
 
-    <!--src -->
-    <script src="js/src/gameObject.js"></script>
-    <script src="js/src/webcamMotion.js" type="text/javascript"></script>
-    <script src="js/src/handleInput.js"></script>
-    <script src="js/src/wsClient.js"></script>
-
-    <script src="js/src/levels/level1.js"></script>
-    <script src="js/src/levels/level2.js"></script>
-    <script src="js/src/levels/level3.js"></script>
-
-    <script src="js/src/index.js"></script>
 </body>
 
 </html>
