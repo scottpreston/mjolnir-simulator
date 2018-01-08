@@ -97,6 +97,5 @@ function processImage(options, ctx, callback) {
             ctx.strokeStyle="#00FF00";
             ctx.stroke();
         }
-        console.log(hits)
     }
 }

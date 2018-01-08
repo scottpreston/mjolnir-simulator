@@ -1,32 +1,57 @@
 <html>
-    <head>
-        <title>Webcam Calibration</title>
-        <link rel="stylesheet" href="css/index.css">
-    </head>
-    
-    <body>
-        <h1>Webcam Calibration</h1>
-        <p>You should see video below of the webcam.</p>
-        <p>Shine IR LED at positions specified by buttons, then click the buttons.</p>
-        <p>
-            <button id="topLeftButton">Top Left</button>
-            <button id="bottomRightButton">Bottom Right</button>
-        </p>
-        <video autoplay id="vid" style="display:none;" height="240" width="320"></video>
-        <div>
-            <canvas id="canvas" width="320" height="240" ></canvas>
-        </div>
+<head>
+    <title>Webcam Calibrate</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
 
-    </body>
-    <script src="js/src/webcam/webcamCalibrate.js" type="text/javascript"></script>
-    <script>
-       
-        // var webcamConfig = { video: "#vid", canvas1: "#canvas", fps: 30 };
-    
-        // var webcamMotion = new WebCamMotion(webcamConfig, function (x, y) {
-        //     console.log({ x: x, y: y });
-        // });
+<body>
+    <h1>WebCam Testing</h1>
+    <p>
+        <a href="index.html">Home Page</a>
+    </p>
+    <video autoplay id="vid" style="display:none;" width="320" height="240"></video>
+    <div>
+        <canvas id="canvas" width="320" height="240"></canvas>
+    </div>
+    <hr>
+    <div id="xyCoords"></div>
+    <button onclick="setTopLeft()">Set Top Left</button>
+    <button onclick="setBottomRight()">Set Bottom Right</button>
+</body>
+<script src="js/src/webcam/webcamMotion.js" type="text/javascript"></script>
+<script>
+    var c = document.querySelector("#canvas");
+    var globalX=0, globalY=0;
+    var webcamConfig = {
+        video: "#vid",
+        canvas1: "canvas",
+        fps: 30,
+        width: 320,
+        height: 240,
+        testing: true
+    };
+    c.width = webcamConfig.width;
+    c.height = webcamConfig.height;
+    var ctx = canvas.getContext('2d')
+    var webcamMotion = new WebCamMotion(webcamConfig, function(x, y, hits) {
+        globalX = x;
+        globalY = y;
+        document.querySelector("#xyCoords").innerHTML = "X = " + x + ", Y = " + y + ", hits = " + hits;
+    });
 
-    </script>
+    function setTopLeft() {
+        var configObject = {x:globalX,y:globalY};
+        localStorage.setItem('topLeft',JSON.stringify(configObject));
+        document.querySelector("#xyCoords").innerHTML = "TOP LEFT: X = " + globalX + ", Y = " + globalY;
+    }
+
+    function setBottomRight() {
+        var configObject = {x:globalX,y:globalY};
+        localStorage.setItem('bottomRight',JSON.stringify(configObject));
+        document.querySelector("#xyCoords").innerHTML = "BOTTOM RIGHT: X = " + globalX + ", Y = " + globalY;
+        
+    }
     
-    </html>
+</script>
+
+</html>
