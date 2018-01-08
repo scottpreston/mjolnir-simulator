@@ -10,6 +10,6 @@ describe("Index spec", function() {
         foo += 1;
 
         expect(foo).toEqual(1);
-        expect(true).toEqual(false);
+        expect(true).toEqual(true);
     });
 });
