@@ -10,7 +10,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "express": "4.15.4",
-    "ws": "3.2.0"
+    "bluetooth-serial-port": "^2.1.5",
+    "express": "^4.16.2",
+    "serialport": "^6.0.4",
+    "ws": "^3.2.0"
   }
 }

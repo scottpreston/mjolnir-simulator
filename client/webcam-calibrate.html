@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>Webcam Calibration</title>
+        <link rel="stylesheet" href="css/index.css">
+    </head>
+    
+    <body>
+        <h1>Webcam Calibration</h1>
+        <p>You should see video below of the webcam.</p>
+        <p>Shine IR LED at positions specified by buttons, then click the buttons.</p>
+        <p>
+            <button id="topLeftButton">Top Left</button>
+            <button id="bottomRightButton">Bottom Right</button>
+        </p>
+        <video autoplay id="vid" style="display:none;" height="240" width="320"></video>
+        <div>
+            <canvas id="canvas" width="320" height="240" ></canvas>
+        </div>
+
+    </body>
+    <script src="js/src/webcam/webcamCalibrate.js" type="text/javascript"></script>
+    <script>
+       
+        // var webcamConfig = { video: "#vid", canvas1: "#canvas", fps: 30 };
+    
+        // var webcamMotion = new WebCamMotion(webcamConfig, function (x, y) {
+        //     console.log({ x: x, y: y });
+        // });
+
+    </script>
+    
+    </html>
