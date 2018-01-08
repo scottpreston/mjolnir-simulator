@@ -2,15 +2,15 @@ var webcamInterval;
 var hitTime = new Date().getTime();
 var previousImageData;
 function WebCamMotion(options, callback) {
-    
+
     console.log( navigator.mediaDevices.getSupportedConstraints())
     var self = this;
     this.fps = 1000 / options.fps;
     this.video = document.querySelector(options.video);
     this.canvas = document.querySelector(options.canvas1);
     this.canvas2 = document.querySelector(options.canvas2);
-    this.ctx = canvas.getContext('2d');
-    this.ctx2 = canvas2.getContext('2d');
+    this.ctx = this.canvas && this.canvas.getContext('2d');
+    this.ctx2 = this.canvas2 &&this.canvas2.getContext('2d');
     this.localMediaStream = null;
 
     this.interval = null;
@@ -47,7 +47,7 @@ function processImage(ctx, ctx2, callback) {
     var data = imageData.data;
     var newData = newImageData.data;
     var avgX = 0, avgY = 0, hits = 0, totalX=0, totalY=0;
-    
+
     if (previousImageData != null) {
         var previousData = previousImageData.data;
         //console.log(previousData)

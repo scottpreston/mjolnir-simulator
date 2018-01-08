@@ -5,7 +5,7 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: 'js',
+    basePath: '',
 
 
     // frameworks to use
@@ -15,7 +15,24 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'src/**/*.spec.js',
+        "js/lib/three.js",
+        "js/lib/ammo.js",
+        "js/lib/OrbitControls.js",
+        "js/lib/Detector.js",
+        "js/lib/stats.min.js",
+        "js/lib/ConvexObjectBreaker.js",
+        "js/lib/QuickHull.js",
+        "js/lib/ConvexGeometry.js",
+        "js/lib/STLLoader.js",
+        "js/src/gameObject.js",
+        "js/src/webcamMotion.js",
+        "js/src/handleInput.js",
+        "js/src/wsClient.js",
+        "js/src/levels/level1.js",
+        "js/src/levels/level2.js",
+        "js/src/levels/level3.js",
+        "js/src/index.js",
+        'js/src/**/*.spec.js'
     ],
 
 
@@ -27,14 +44,30 @@ module.exports = function(config) {
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+
     preprocessors: {
+        "js/src/gameObject.js": ['coverage'],
+        "js/src/webcamMotion.js": ['coverage'],
+        "js/src/handleInput.js": ['coverage'],
+        "js/src/wsClient.js": ['coverage'],
+        "js/src/levels/level1.js": ['coverage'],
+        "js/src/levels/level2.js": ['coverage'],
+        "js/src/levels/level3.js": ['coverage'],
+        "js/src/index.js": ['coverage'],
+    },
+
+    // optionally, configure the reporter
+    coverageReporter: {
+        type : 'text-summary',
+        dir : '../coverage/',
+        subdir:'.'
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['spec'],
+    reporters: ['spec', 'coverage'],
 
 
     // web server port
@@ -51,17 +84,17 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+    autoWatch: true,
 
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true,
+    singleRun: false,
 
     // Concurrency level
     // how many browser should be started simultaneous

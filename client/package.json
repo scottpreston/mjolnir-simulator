@@ -1,23 +1,28 @@
 {
-  "name": "mjolnir-simulator-client",
-  "version": "1.0.0",
-  "description": "the client app for the sim.",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "http-server . -p 1337",
-    "test": "karma start"
-  },
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "http-server": "^0.10.0"
-  },
-  "devDependencies": {
-    "jasmine": "^2.8.0",
-    "karma": "^2.0.0",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-jasmine": "^1.1.1",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "karma-spec-reporter": "0.0.32"
-  }
+    "name": "mjolnir-simulator-client",
+    "version": "1.0.0",
+    "description": "the client app for the sim.",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "http-server . -p 1337",
+        "test": "karma start",
+        "check-coverage": "istanbul check-coverage --statements 100 --functions 100 --branches 100 --lines 100",
+        "report-coverage": "cat ./coverage/lcov.info | codecov"
+    },
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "http-server": "^0.10.0"
+    },
+    "devDependencies": {
+        "istanbul": "^0.4.5",
+        "jasmine": "^2.8.0",
+        "karma": "^2.0.0",
+        "karma-chrome-launcher": "^2.2.0",
+        "karma-coverage": "^1.1.1",
+        "karma-fixture": "^0.2.6",
+        "karma-jasmine": "^1.1.1",
+        "karma-phantomjs-launcher": "^1.0.4",
+        "karma-spec-reporter": "0.0.32"
+    }
 }
