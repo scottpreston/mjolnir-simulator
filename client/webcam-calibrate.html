@@ -42,12 +42,14 @@
     function setTopLeft() {
         var configObject = {x:globalX,y:globalY};
         localStorage.setItem('topLeft',JSON.stringify(configObject));
+        localStorage.setItem('canvasSize',JSON.stringify({height:c.height, width: c.width}));
         document.querySelector("#xyCoords").innerHTML = "TOP LEFT: X = " + globalX + ", Y = " + globalY;
     }
 
     function setBottomRight() {
         var configObject = {x:globalX,y:globalY};
         localStorage.setItem('bottomRight',JSON.stringify(configObject));
+        localStorage.setItem('canvasSize',JSON.stringify({height:c.height, width: c.width}));
         document.querySelector("#xyCoords").innerHTML = "BOTTOM RIGHT: X = " + globalX + ", Y = " + globalY;
         
     }
