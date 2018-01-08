@@ -1,0 +1,19 @@
+sudo: false
+language: node_js
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: true
+node_js:
+  - '8'
+before_install:
+  - npm i -g npm@^5.0.0
+before_script:
+  - npm prune
+script:
+  - npm run 
+  - npm run test
+  - npm run check-coverage
+after_success:
+  - npm run report-coverage
