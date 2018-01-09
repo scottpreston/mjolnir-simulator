@@ -72,8 +72,8 @@ function processImage(options, ctx, callback) {
             var gray = (r + g + b) / 3;
             
             if (gray > 250) {
-                avgX = avgX + x;
-                avgY = avgY + y;
+                avgX = avgX + (x - startX);
+                avgY = avgY + (y - startY);
                 hits++;
             }
         }
@@ -92,12 +92,12 @@ function processImage(options, ctx, callback) {
     } else {
         if (options.testing) {
             ctx.beginPath();
-            ctx.moveTo(0,y);
-            ctx.lineTo(options.width,y);
+            ctx.moveTo(0,y+startY);
+            ctx.lineTo(options.width,y+startY);
             ctx.stroke();
             ctx.beginPath();
-            ctx.moveTo(x,0);
-            ctx.lineTo(x,options.height);
+            ctx.moveTo(x+startX,0);
+            ctx.lineTo(x+startX,options.height);
             ctx.strokeStyle="#00FF00";
             ctx.stroke();
             ctx.closePath();

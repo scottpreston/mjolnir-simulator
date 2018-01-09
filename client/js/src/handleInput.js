@@ -11,23 +11,52 @@ var handleMouseClick = function(event) {
     window.dispatchEvent(event);
 };
 //making this global variable so that I can access it in setupInputSources
-var webcamMotionInstance = null;
+
 var handleWebCamMotion = function() {
-    var webcamConfig = { video: "#vid", canvas1: "#canvas", canvas2: "#canvas2", fps: 30 };
-    if (webcamMotionInstance === null) {
-        webcamMotionInstance = new WebCamMotion(webcamConfig, function(x, y) {
-            console.log({ x: x, y: y });
-            var velocity = 35 // TODO: Temporary value for testing
 
-            var inputValues = {
-                x: x * 6,
-                y: y * 4.5,
-                velocity: velocity
-            };
+    var topLeft = JSON.parse(localStorage.getItem("topLeft"));
+    var bottomRight = JSON.parse(localStorage.getItem("bottomRight"));
+    var canvasSize = JSON.parse(localStorage.getItem("canvasSize"));
 
-            var event = new CustomEvent('generateHammer', { detail: { inputValues: inputValues } });
-            window.dispatchEvent(event);
-        });
+    var webcamConfig = {
+        video: "#vid",
+        canvas1: "canvas",
+        fps: 30,
+        width: 320,
+        height: 240,
+        testing: true,
+        startX: parseInt(topLeft.x),
+        endX: parseInt(bottomRight.x),
+        startY: parseInt(topLeft.y),
+        endY: parseInt(bottomRight.y)
+    };
+
+    // resize canvas to config
+    var c = document.querySelector("#canvas");    
+    c.width = webcamConfig.width;
+    c.height = webcamConfig.height;
+
+    webcamMotionInstance = new WebCamMotion(webcamConfig, function(x, y, hits) {
+        var newCoords = calibrate(x,y);
+        var inputValues = {
+            x: newCoords.x,
+            y: newCoords.y,
+            velocity: 35
+        };
+        console.log(inputValues);
+        var event = new CustomEvent('generateHammer', { detail: { inputValues: inputValues } });
+        window.dispatchEvent(event);
+    });
+
+    function calibrate(x,y) {
+        var targetWidth = bottomRight.x - topLeft.x;
+        var targetHeight =  bottomRight.y - topLeft.y;
+        var screenHeight = window.innerHeight;
+        var screenWidth = window.innerWidth;
+        var scaleX = screenWidth / targetWidth;
+        var scaleY = screenHeight / targetHeight;
+        console.log(screen,scaleX,scaleY);
+        return {x:scaleX * x, y: scaleY * y};
     }
 };
 
@@ -35,9 +64,6 @@ var setupInputSources = function(event) {
 
     //remove the listener before setting it up again
     window.removeEventListener('mousedown', handleMouseClick);
-
-    webcamMotionInstance !== null ? stopCapture() : console.log('nothing to stop');
-    webcamMotionInstance = null;
 
     var isMouse = document.querySelector("input[name='hammerSource']:checked").value === 'mouse';
 
