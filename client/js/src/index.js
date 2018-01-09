@@ -76,12 +76,7 @@ function initGraphics() {
 	scene.background = new THREE.TextureLoader().load( window.mjolnirGameObject.levels[currentLevel].background );
 
 	camera.position.set( 0, 3, 20 );
-	// camera.lookAt( scene.position ); // scene.position is a Vector3 at (0, 0, 0)
 	camera.lookAt( new THREE.Vector3(0, 8, 0) );
-
-	// Remove these comments to return to mouse movable camera
-	// controls = new THREE.OrbitControls( camera );
-	// controls.update();
 
 	renderer = new THREE.WebGLRenderer();
 	renderer.setPixelRatio( window.devicePixelRatio );
@@ -177,7 +172,6 @@ function createTargetPane(xpos, ypos, zpos, targetData) {
 			material = new THREE.MeshLambertMaterial({ map: textureLoader.load("assets/textures/tmp_background.png")});
 	}
 
-	// createObject( towerMass, towerHalfExtents, pos, quat, createMaterial( 0xF0A024 ) ); // original object
 	createObject( towerMass, towerHalfExtents, pos, quat, material, targetData );
 
 	// fall guards, prevents thin pane from falling over, made green for debugging purposes
@@ -229,32 +223,6 @@ function createObjects() {
         default:
             createLevel1Objects();
     }
-
-	// // Ground
-	// pos.set( 0, - 0.5, 0 );
-	// quat.set( 0, 0, 0, 1 );
-	// var ground = createParalellepipedWithPhysics( 100, 1, 100, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0xFFFFFF } ) );
-	// ground.receiveShadow = true;
-	// textureLoader.load( window.mjolnirGameObject.levels[currentLevel].ground, function( texture ) {
-	// 	texture.wrapS = THREE.RepeatWrapping;
-	// 	texture.wrapT = THREE.RepeatWrapping;
-	// 	texture.repeat.set( 3, 2 );
-	// 	ground.material.map = texture;
-	// 	ground.material.needsUpdate = true;
-	// } );
-
-	// var hydraTargetData = {type: 'hydra', score: 10};
-	// var ultronTargetData = {type: 'ultron', score: 20};
-	// var lokiTargetData = {type: 'loki', score: 30};
-	// var shieldTargetData = {type: 'shield', score: -20};
-	// var thanosTargetData = {type: 'thanos', score: 80};
-
-	// // Add Hydra Panes
-	// createTargetPane(20, .5, -15, hydraTargetData);
-	// createTargetPane(-20, 15, -20, ultronTargetData);
-	// createTargetPane(-10, 0, 5, lokiTargetData);
-	// createTargetPane(0, 3, -17, shieldTargetData);
-	// createTargetPane(7, 10, 0, thanosTargetData);
 }
 
 function createParalellepipedWithPhysics( sx, sy, sz, mass, pos, quat, material ) {
@@ -413,24 +381,6 @@ function handleInput(x, y, vel) {
 
 		scene.add( hammerMesh );
 	} );
-
-	// Creates a ball and throws it
-	// var ballMass = 35;
-	// var ballRadius = 0.4;
-	// var ball = new THREE.Mesh( hammerSTL );
-	// ball.castShadow = true;
-	// ball.receiveShadow = true;
-	// var ballShape = new Ammo.btSphereShape( ballRadius );
-	// ballShape.setMargin( margin );
-	// pos.copy( raycaster.ray.direction );
-	// pos.add( raycaster.ray.origin );
-	// quat.set( 0, 0, 0, 1 );
-	// var ballBody = createRigidBody( ball, ballShape, ballMass, pos, quat );
-
-	// pos.copy( raycaster.ray.direction );
-	// // pos.multiplyScalar( 24 ); // original ball velocity
-	// pos.multiplyScalar(vel);
-	// ballBody.setLinearVelocity( new Ammo.btVector3( pos.x, pos.y, pos.z ) );
 }
 
 function onWindowResize() {
