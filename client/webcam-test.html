@@ -16,24 +16,55 @@
     </div>
     <hr>
     <div id="xyCoords"></div>
+    <h2>TopLeft,BottomRight</h2>
+    <div id="coords"></div>
+    <h2>Translated Coords (<span id="canvasSize"></span>) to (<span id="screenSize"></span>)</h2>
+    <div id="translatedCoords"></div>
 </body>
 <script src="js/src/webcam/webcamMotion.js" type="text/javascript"></script>
 <script>
+    var topLeft = JSON.parse(localStorage.getItem("topLeft"));
+    var bottomRight = JSON.parse(localStorage.getItem("bottomRight"));
+    var canvasSize = JSON.parse(localStorage.getItem("canvasSize"));
     var c = document.querySelector("#canvas");
+
+    var targetWidth = bottomRight.x - topLeft.x;
+    var targetHeight =  bottomRight.y - topLeft.y;
     var webcamConfig = {
         video: "#vid",
         canvas1: "canvas",
         fps: 30,
         width: 320,
         height: 240,
-        testing: true
+        testing: true,
+        startX: parseInt(topLeft.x),
+        endX: parseInt(bottomRight.x),
+        startY: parseInt(topLeft.y),
+        endY: parseInt(bottomRight.y)
     };
+    
     c.width = webcamConfig.width;
     c.height = webcamConfig.height;
-    var ctx = canvas.getContext('2d')
+    //var ctx = canvas.getContext('2d')
     var webcamMotion = new WebCamMotion(webcamConfig, function(x, y, hits) {
         document.querySelector("#xyCoords").innerHTML = "X = " + x + ", Y = " + y + ", hits = " + hits;
+        var newCoords = calibrate(x,y);
+        document.querySelector("#translatedCoords").innerHTML  =newCoords.x + "," + newCoords.y;
     });
+
+    var targetWidth = bottomRight.x - topLeft.x;
+    var targetHeight =  bottomRight.y - topLeft.y;
+    var screenHeight = screen.availHeight;
+    var screenWidth = screen.availWidth;
+
+    document.querySelector("#canvasSize").innerHTML = parseInt(targetWidth) + "x" + parseInt(targetHeight);
+    document.querySelector("#screenSize").innerHTML = screenWidth + "x" + screenHeight;
+
+    function calibrate(x,y) {
+        var scaleX = screenWidth/targetWidth;
+        var scaleY = screenHeight/targetHeight;
+        return {x:scaleX * x, y: scaleY * y};
+    }
     
 </script>
 

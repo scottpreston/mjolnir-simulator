@@ -5,7 +5,7 @@
 </head>
 
 <body>
-    <h1>WebCam Testing</h1>
+    <h1>WebCam Calibration</h1>
     <p>
         <a href="index.html">Home Page</a>
     </p>
@@ -17,6 +17,7 @@
     <div id="xyCoords"></div>
     <button onclick="setTopLeft()">Set Top Left</button>
     <button onclick="setBottomRight()">Set Bottom Right</button>
+    <button onclick="reset()">Reset</button>
 </body>
 <script src="js/src/webcam/webcamMotion.js" type="text/javascript"></script>
 <script>
@@ -28,7 +29,11 @@
         fps: 30,
         width: 320,
         height: 240,
-        testing: true
+        testing: true,
+        startX: 0, 
+        startY: 0,
+        endX: 320,
+        endY: 240
     };
     c.width = webcamConfig.width;
     c.height = webcamConfig.height;
@@ -51,9 +56,12 @@
         localStorage.setItem('bottomRight',JSON.stringify(configObject));
         localStorage.setItem('canvasSize',JSON.stringify({height:c.height, width: c.width}));
         document.querySelector("#xyCoords").innerHTML = "BOTTOM RIGHT: X = " + globalX + ", Y = " + globalY;
-        
     }
-    
+    function reset() {
+        localStorage.setItem('topLeft',JSON.stringify({x:0,y:0}));
+        localStorage.setItem('bottomRight',JSON.stringify({x:320,y:240}));
+        localStorage.setItem('canvasSize',JSON.stringify({height:c.height, width: c.width}));
+    }
 </script>
 
 </html>

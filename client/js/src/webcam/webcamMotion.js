@@ -58,8 +58,12 @@ function processImage(options, ctx, callback) {
         totalY = 0,
         x = 0,
         y = 0;
-    for (var x = 0; x < options.width; x++) {
-        for (var y = 0; y < options.height; y++) {
+    var startX = options.startX || 0;
+    var startY = options.startY || 0;
+    var endX = options.endX || options.width;
+    var endY = options.endY || options.height;
+    for (var x = startX; x < endX; x++) {
+        for (var y = startY; y < endY; y++) {
             var offset = x * 4 + y * 4 * imageData.width;
             var r = data[offset]
             var g = data[offset + 1];
@@ -96,6 +100,11 @@ function processImage(options, ctx, callback) {
             ctx.lineTo(x,options.height);
             ctx.strokeStyle="#00FF00";
             ctx.stroke();
+            ctx.closePath();
+            ctx.rect(options.startX,options.startY,options.endX-options.startX, options.endY-options.startY);
+            ctx.strokeStyle="#FF0000";
+            ctx.stroke();
+            ctx.closePath();
         }
     }
 }
