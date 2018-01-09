@@ -167,3 +167,7 @@ a {
 .info label:hover {
   background:#DDD;
 }
+
+canvas {
+  border: 1px solid black;
+}
