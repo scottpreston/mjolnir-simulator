@@ -13,15 +13,11 @@ function createLevel2Objects() {
         ground.material.needsUpdate = true;
     });
 
-    // var hydraTargetData = { type: 'hydra', score: 10 };
-    // var ultronTargetData = { type: 'ultron', score: 20 };
     var lokiTargetData = { type: 'loki', score: 30 };
     var shieldTargetData = { type: 'shield', score: -20 };
     var thanosTargetData = { type: 'thanos', score: 80 };
 
     // Add Hydra Panes
-    // createTargetPane(20, .5, -15, hydraTargetData);
-    // createTargetPane(-20, 15, -20, ultronTargetData);
     createTargetPane(-10, 0, 5, lokiTargetData);
     createTargetPane(0, 3, -17, shieldTargetData);
     createTargetPane(7, 10, 0, thanosTargetData);
