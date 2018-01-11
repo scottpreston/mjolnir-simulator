@@ -82,7 +82,7 @@ function processImage(options, ctx, callback) {
         x = avgX / hits;
         y = avgY / hits;
     }
-    if (avgX > 0 && avgY > 0 && hits > 150 && new Date().getTime() > hitTime + 5000) {
+    if (avgX > 0 && avgY > 0 && hits > 50 && new Date().getTime() > hitTime + 5000) {
         hitTime = new Date().getTime();
         setTimeout(function () {
             console.log('ready')
