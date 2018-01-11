@@ -19,6 +19,6 @@ function createLevel2Objects() {
 
     // Add Hydra Panes
     createTargetPane(-10, 0, 5, lokiTargetData);
-    createTargetPane(0, 3, -17, shieldTargetData);
-    createTargetPane(7, 10, 0, thanosTargetData);
+    createTargetPane(0, 3, -17, thanosTargetData);
+    createTargetPane(7, 10, 0, shieldTargetData);
 }

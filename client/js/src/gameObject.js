@@ -12,7 +12,7 @@ window.mjolnirGameObject = {
         ground: "assets/textures/ground_texture.jpg"
     },
     {
-        background: "assets/textures/snow_texture.jpg",
+        background: "assets/textures/mars.png",
         ground: "assets/textures/snow.jpg"
     }
     ]
